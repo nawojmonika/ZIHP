@@ -110,7 +110,77 @@
 %----------------------------------------------------------------------------------------
 
 \section{Treść projektu}
-
+O ile nie jest powiedziane inaczej, to jako rozwiązanie należy przesłać: mo-
+del matematyczny problemu, pliki z modelem i danymi, uzyskane wyniki z
+interpretacją. \\
+Zadania do wykonania:
+\begin{enumerate}
+    \item Odpowiedzieć na pytanie, jak można zmiejszć liczbę zmiennych wykorzystaywanych w zadaniu opisanym w posekcji 3.2.
+    \item Znaleźć najkrótszy czas wykonania przedsięwzięcia (dane są podane poniżej) - krozystając z grafu w postaci krawędziowej
+    \item Zapisać i rozwiązać dla podanych danych problem stworzenia harmono-
+          gramu o minimalnym czasie wykonania, jako zadanie programowania
+          liniowego. Podać uzyskany harmonogram.
+    \item Wprowadzamy drobną modyfikację w tym zadaniu planowania. Zadania można skrócić poprzez przydział dodatkowych środków.
+          Przydzielając dodatkowe \(\alpha_i\) środków skracam czas wykonania zadania \(i\) o 1
+          dzień. Każde zadanie ma minimalny czas wykonywania zadania tmin,
+          poniżej którego się nie da skrócić. Rozwiązując to zadanie, uzyskamy
+          minimalny czas realizacji przedsięwzięcia, przy określonym budżecie,
+          czy w uzyskanym rozwiązaniu (w ogólnym przypadku) jest wykorzystywany minimalny budżet. W jaki sposób dobieramy zadania do skrócenia (w ogólnym przypadku)?
+    \item Podobnie jak w poprzednim punkcie istnieje możliwość skracania czasów zadań. Dodatkowym ograniczeniem jest to, ze liczba skróconych
+          zadanie nie może przekroczyć NS. Czy zmienia sie warunki doboru
+          zadań do skrócenia?
+    \item Weźmy warunki z punktu 2 (tzn. bez mozliwości skracania zadań).
+          Wprowadzamy drugi typ relacji poprzedzania: zadanie b nie może zakończyć sie przed zakończeniem zadania a. Zapisać i rozwiązać dla
+          podanych danych zadanie w którym występują oba typy relacji poprzedzania.
+\end{enumerate}
+\subsection{Dane}
+\begin{table}[H]
+    \centering
+    \begin{tabular} {| c | c | c | c | c |}
+        \hline
+        Zadanie & \(t\) & poprzedniki & \(\alpha\) & \(t^{min}\) \\
+        \hline
+        A       & 14    &             & 70         & 8           \\
+        \hline
+        B       & 8     & G           & 5          & 3           \\
+        \hline
+        C       & 14    & A           & 1          & 1           \\
+        \hline
+        D       & 8     & I           & 50         & 3           \\
+        \hline
+        E       & 5     &             & 90         & 5           \\
+        \hline
+        F       & 7     & B,H         & 80         & 3           \\
+        \hline
+        G       & 15    & A,E         & 75         & 6           \\
+        \hline
+        H       & 5     & D           & 100        & 1           \\
+        \hline
+        I       & 10    & E           & 50         & 6           \\
+        \hline
+        J       & 9     & G,I         & 20         & 5           \\
+        \hline
+    \end{tabular}
+    \caption{Dane do projektu przedtawione w formie tabeli.}
+    \label{tab:dane}
+\end{table}
+W punkcie 2 i 3 dostępne są środki do skracania zadań: 200. \\
+W punkcie 3 NS = 2. \\
+Dodatkowa relacja poprzedzania: \\
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c |}
+        \hline
+        Zadanie poprzedzające & Następnik \\
+        \hline
+        C & B \\
+        \hline
+        D & G \\
+        \hline
+    \end{tabular}
+    \caption{Dodatkowe relacje przedstawione w formie tabeli.}
+    \label{tab:dod_rel}  
+\end{table}
 \newpage
 
 \lstlistoflistings
