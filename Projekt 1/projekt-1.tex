@@ -192,7 +192,7 @@ wykonywania zadania \(j\) \((t^p_j, t^k_j)\) jeżeli przedstawimy porządek wyko
 %     \label{fig:graf-1}
 % \end{figure}
 % TO DO: poprawić graf
-\subsection{Najkrótszy czas wykonania przedsięwzięcia}
+\subsection{Najkrótszy czas wykonania przedsięwzięcia przy wykorzystaniu grafu w postaci krawędziowej}
 \begin{enumerate}
     \item Przedstawiam porządek wykonywania zadań w postaci grafu krawędziowego.
     \begin{figure}[H]
@@ -240,8 +240,16 @@ wykonywania zadania \(j\) \((t^p_j, t^k_j)\) jeżeli przedstawimy porządek wyko
     Wyznaczona ścieżka krytyczna została zaznaczona na rysunku ~\ref{fig:graf-3} czerwonym kolorem.
 \end{enumerate}
 Czas potrzebny na przebycie ścieżki krytycznej to 44 jednostki czasu.
-
 \subsection{Harmonogram o minimalnym czasie wykonania}
+W celu uzyskania minimalnego czasu wykonania całego przedsięwzięcia zadanie programowania liniowego
+zostało zapisane w języku modelowania AMPL.
+\lstinputlisting[caption=Model w języku AMPL]{./src/model.mod}
+\lstinputlisting[caption=Dane w języku AMPL]{./src/dane.dat}
+\begin{lstlisting}[caption=Rozwiązanie znalezione solwerem minos]
+    MINOS 5.51: optimal solution found.
+    5 iterations, objective 44
+== 1 ==========================
+\end{lstlisting}
 \subsection{Minimalny czas realizacji przedsięwzięcia przy określonym budżecie}
 \subsection{Dobór zadań przy wprowadzonym ograniczeniu NS}
 \subsection{Najkrótszy czas wykonania przedsięwzięcia, gdy zadanie B nie może zakończyć się przed zakońćzeniem zadania A}
