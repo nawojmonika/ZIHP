@@ -202,7 +202,7 @@ wykonywania zadania \(j\) \((t^p_j, t^k_j)\) jeżeli przedstawimy porządek wyko
         \label{fig:graf-2}
     \end{figure}
     Rysunek ~\ref{fig:graf-2} przedstawia porządek wykonywania zadań w postaci grafu krawędziowego wraz z posortowanymi wierzchołkami.
-    \item Następnie obliczam najwcześniejsze momenty rozpoczęcia:
+    \item Obliczam najwcześniejsze momenty rozpoczęcia:
     \begin{flalign*}
         & T_p0 = 0 &&\\
         & T_p1 = 0 + 5 = 5 &&\\
@@ -215,11 +215,37 @@ wykonywania zadania \(j\) \((t^p_j, t^k_j)\) jeżeli przedstawimy porządek wyko
         & T_p8 = \max{(29 + 8, 23 + 5)} = \max{(37, 28)} = 37&&\\
         & T_p9 = \max{(5 + 14, 29 + 9, 37 + 7)} = \max{(17, 38, 44)} = 44&&\\
     \end{flalign*}
+    \item Obliczam najpóźniejszy moment zakończenia zadania:
+    \begin{flalign*}
+        & T_k9 = 44&&\\
+        & T_k8 = 44 - 7 = 37&&\\
+        & T_k7 = 37 - 5 = 32&&\\
+        & T_k6 = 44 - 9 =  35&&\\
+        & T_k5 = \min{(35 - 0, 37 - 8)} = \min{(35, 29)} = 29 &&\\
+        & T_k4 = \min{(35 - 0, 32 - 8)} = \min{(35, 24)} = 24 &&\\
+        & T_k3 = 29 - 15 = 14 &&\\
+        & T_k2 = \min{(44 - 14, 14 - 0)} = \min{(30, 14)} = 14 &&\\
+        & T_k1 = \min{(14 - 0, 24 - 10)} = \min{(14, 14)} = 14 &&\\
+        & T_k0 = \min{(14 - 14, 14 - 5)} = \min{(0, 9)} = 0 &&\\
+    \end{flalign*}
+    \item Powyższe obliczenia nanoszę na graf, a następnie określam ścieżkę krytyczną
+    poprzez połączenie wszystkich węzłów, gdzie najwcześniejszy moment rozpoczęcia (\(T_p\)) jest identyczny z momentem najpóźniejszym
+    momentem zakończenia zadania (\( T_k\)).
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{./img/graf-3.PNG}
+        \caption{Wyznaczona ścieżka krytyczna.}
+        \label{fig:graf-3}
+    \end{figure}
+    Wyznaczona ścieżka krytyczna została zaznaczona na rysunku ~\ref{fig:graf-3} czerwonym kolorem.
 \end{enumerate}
+Czas potrzebny na przebycie ścieżki krytycznej to 44 jednostki czasu.
+
 \subsection{Harmonogram o minimalnym czasie wykonania}
 \subsection{Minimalny czas realizacji przedsięwzięcia przy określonym budżecie}
 \subsection{Dobór zadań przy wprowadzonym ograniczeniu NS}
 \subsection{Najkrótszy czas wykonania przedsięwzięcia, gdy zadanie B nie może zakończyć się przed zakońćzeniem zadania A}
+\newpage
 \lstlistoflistings
 \listoffigures
 \listoftables
