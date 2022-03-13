@@ -184,14 +184,38 @@ Dodatkowa relacja poprzedzania: \\
 Możliwe jest zmniejszenie liczby zmiennych wykorzystywanych w wyżej wymienionym
 zadaniu przy wykorzystaniu metody ścieżki krytycznej (CPM).
 Możemy się pozbyć się zmniennych związanych z momentem rozpoczęcia oraz zakończenia
-wykonywania zadania \(j\) \((t^p_j, t^k_j)\) jeżeli przedstawimy porządek wykonywania zadań w postaci grafu.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\linewidth]{./img/graf.PNG}
-    \caption{Porządek wykonywania zadań w postaci grafu krawędziowego.}
-    \label{fig:graf}
-\end{figure}
+wykonywania zadania \(j\) \((t^p_j, t^k_j)\) jeżeli przedstawimy porządek wykonywania zadań w postaci grafu krawędziowego.
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.7\linewidth]{./img/graf-1.PNG}
+%     \caption{Porządek wykonywania zadań w postaci grafu krawędziowego.}
+%     \label{fig:graf-1}
+% \end{figure}
+% TO DO: poprawić graf
 \subsection{Najkrótszy czas wykonania przedsięwzięcia}
+\begin{enumerate}
+    \item Przedstawiam porządek wykonywania zadań w postaci grafu krawędziowego.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{./img/graf-2.PNG}
+        \caption{Porządek wykonywania zadań w postaci grafu krawędziowego.}
+        \label{fig:graf-2}
+    \end{figure}
+    Rysunek ~\ref{fig:graf-2} przedstawia porządek wykonywania zadań w postaci grafu krawędziowego wraz z posortowanymi wierzchołkami.
+    \item Następnie obliczam najwcześniejsze momenty rozpoczęcia:
+    \begin{flalign*}
+        & T_p0 = 0 &&\\
+        & T_p1 = 0 + 5 = 5 &&\\
+        & T_p2 = 0 + 14 = 14 &&\\
+        & T_p3 = \max{(5 + 0, 14 + 0)} = 14 &&\\
+        & T_p4 = 5 + 10 = 15 &&\\
+        & T_p5 = 14 + 15 = 29 &&\\
+        & T_p6 = \max{(15 + 0, 29 + 0)}= 29 &&\\
+        & T_p7 = 15 + 8 = 23 &&\\
+        & T_p8 = \max{(29 + 8, 23 + 5)} = \max{(37, 28)} = 37&&\\
+        & T_p9 = \max{(5 + 14, 29 + 9, 37 + 7)} = \max{(17, 38, 44)} = 44&&\\
+    \end{flalign*}
+\end{enumerate}
 \subsection{Harmonogram o minimalnym czasie wykonania}
 \subsection{Minimalny czas realizacji przedsięwzięcia przy określonym budżecie}
 \subsection{Dobór zadań przy wprowadzonym ograniczeniu NS}
