@@ -298,12 +298,34 @@ Defniujemy również dodatkowe ograniczenia:
     T_j \geq T_i + p_{ij} - tr_{ij} \forall (i,j) \in R \\
     0 \leq tr_{ij} \leq td_{ij}
 \end{align*}
-Modyfikujemy również funkcję celu: 
-\begin{align*}
-    min T_9
-\end{align*}
 \lstinputlisting[caption=Model w języku AMPL]{./src/model-2.mod}
 \lstinputlisting[caption=Dane w języku AMPL]{./src/dane-2.dat}
+\begin{lstlisting}[caption=Rozwiązanie znalezione solwerem minos]
+    MINOS 5.51: ignoring integrality of 9 variables
+    MINOS 5.51: optimal solution found.
+    12 iterations, objective 32.15
+    t_r :=
+    0 1   0
+    0 2   1
+    1 3   0
+    1 4   0
+    2 3   0
+    2 9   0
+    3 5   0
+    4 6   0
+    4 7   0
+    5 6   0
+    5 8   5
+    6 9   1.85
+    7 8   0
+    8 9   0.85
+    ;
+    == 1 ==========================
+\end{lstlisting}
+Zgodnie z powyższymi wynikami minimalny czas wykonania zadań może zostać skrócony do 32 jednostek czasu.
+Skróceniu ulega zadanie: \textbf{A} o 1 jednostkę czasu, 
+zadanie \textbf{B} o 5 jednostek czasu, zadaine \textbf{F} o 1.85 jednostek czasu
+oraz zadanie \textbf{J} o 0.85 jednostek czasu.
 \subsection{Dobór zadań przy wprowadzonym ograniczeniu NS}
 \subsection{Najkrótszy czas wykonania przedsięwzięcia, gdy zadanie B nie może zakończyć się przed zakońćzeniem zadania A}
 \newpage
