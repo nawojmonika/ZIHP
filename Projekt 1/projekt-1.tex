@@ -332,9 +332,50 @@ Dane zostały załączony w pliku \textit{dane-2.dat}.
     == 1 ==========================
 \end{lstlisting}
 Zgodnie z powyższymi wynikami minimalny czas wykonania zadań może zostać skrócony do 36.5 jednostek czasu.
-Skróceniu ulega zadanie: \textbf{A} o 2 jednostki czasu, zadanie \textbf{G} o 0.5 jednostek czasu 
+Skróceniu ulega zadanie: \textbf{A} o 2 jednostki czasu, zadanie \textbf{G} o 0.5 jednostek czasu
 oraz zadanie \textbf{B} o 5 jednostek czasu.
 \subsection{Dobór zadań przy wprowadzonym ograniczeniu NS}
+Warunki doboru zadań do skrócenia zmienią się przy wprowadzeniu ograniczenia NS,
+jednakże nadal jednym z kryterium wyboru zadań do skrócenia jest położenie na ścieżce krytycznej
+oraz koszt i długość zadania. \\
+W celu rozwiązania tego problemu definiuję dodatkowe ograniczenia
+do modelu przedstawionego w poprzedniej sekcji:
+\begin{flalign*}
+     & 0 \leq \sum r_j \leq 2 &  & \\
+     & r_j \in {0,1} 2        &  & \\
+\end{flalign*}
+gdzie: \\
+\(r_j\) - to skrócone zadanie \(j\) \\
+\lstinputlisting[caption=Model w języku AMPL]{./src/model-3.mod}
+Model został załączony w pliku \textit{model-3.mod}.
+\lstinputlisting[caption=Dane w języku AMPL]{./src/dane-2.dat}
+Dane zostały załączony w pliku \textit{dane-2.dat}.
+\begin{lstlisting}[caption=Rozwiązanie znalezione solwerem minos]
+    MINOS 5.51: ignoring integrality of 9 variables
+    MINOS 5.51: optimal solution found.
+    23 iterations, objective 36.5
+    Nonlin evals: constrs = 126, Jac = 125.
+    t_r :=
+    0 1   0
+    0 2   2.5
+    1 3   0
+    1 4   0
+    2 3   0
+    2 9   0
+    3 5   0
+    4 6   0
+    4 7   0
+    5 6   0
+    5 8   5
+    6 9   0
+    7 8   0
+    8 9   0
+    ;
+\end{lstlisting}
+Zgodnie z powyższymi wynikami minimalny czas wykonania zadań nie zmienił 
+się od czasu obliczonego w poprzednim podpunkcie bez ograniczenia NS.
+Natomiast zmieniły się skrócone zadania w następujący sposób:
+zadanie \textbf{A} o 2.5 jednostki czasu oraz zadanie \textbf{B} o 5 jednostek czasu.
 \subsection{Najkrótszy czas wykonania przedsięwzięcia, gdy zadanie B nie może zakończyć się przed zakońćzeniem zadania A}
 \newpage
 \lstlistoflistings
