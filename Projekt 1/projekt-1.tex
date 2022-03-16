@@ -185,13 +185,7 @@ Możliwe jest zmniejszenie liczby zmiennych wykorzystywanych w wyżej wymieniony
 zadaniu przy wykorzystaniu metody ścieżki krytycznej (CPM).
 Możemy się pozbyć się zmniennych związanych z momentem rozpoczęcia oraz zakończenia
 wykonywania zadania \(j\) \((t^p_j, t^k_j)\) jeżeli przedstawimy porządek wykonywania zadań w postaci grafu krawędziowego.
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.7\linewidth]{./img/graf-1.PNG}
-%     \caption{Porządek wykonywania zadań w postaci grafu krawędziowego.}
-%     \label{fig:graf-1}
-% \end{figure}
-% TO DO: poprawić graf
+
 \subsection{Najkrótszy czas wykonania przedsięwzięcia przy wykorzystaniu grafu w postaci krawędziowej}
 \begin{enumerate}
     \item Przedstawiam porządek wykonywania zadań w postaci grafu krawędziowego.
@@ -251,7 +245,18 @@ zostało zapisane w języku modelowania AMPL.
     == 1 ==========================
 \end{lstlisting}
 Rozwiązanie zadania liniowego solwerem MINOS również znajduje wartość 44 jednostek czasu jako minimalny czas realizacji.
-% To do: wstawić harmonogram
+\\
+Rozwiązanie w formie harmonogramu zostało przedstawione na rysunku ~\ref{fig:harmonogram}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{./img/harmonogram.PNG}
+    \caption{Wyznaczona ścieżka krytyczna.}
+    \label{fig:harmonogram}
+\end{figure}
+Harmonogram w formie wykresu Gantta został stworzony za pomocą aplikacji webowej o nazwie
+\href{https://app.instagantt.com/}{instagantt}, gdzie zostały dodane zadania
+w odpowiedniej kolejności, a jednostka czasu \(t\) to jeden dzień. 
+
 \subsection{Minimalny czas realizacji przedsięwzięcia przy określonym budżecie}
 W ogólnym przypadku dobieramy zadania do skrócenia sprawdzając czy ich skrócenie jest możliwe.
 Aby to zrobić należy odjąć od czasu trwania zadania jego czas minimalny.
@@ -295,7 +300,7 @@ Ze względu na modyfikację zadania należy wprowadzić dodatkowe zmienne do mod
 Defniujemy również dodatkowe ograniczenia:
 \begin{align*}
     \sum c_{ij} \cdot tr_{ij} \leq 200 \forall (i, j) \in R \\
-    T_j \geq T_i + p_{ij} - tr_{ij} \forall (i,j) \in R \\
+    T_j \geq T_i + p_{ij} - tr_{ij} \forall (i,j) \in R     \\
     0 \leq tr_{ij} \leq td_{ij}
 \end{align*}
 \lstinputlisting[caption=Model w języku AMPL]{./src/model-2.mod}
@@ -323,7 +328,7 @@ Defniujemy również dodatkowe ograniczenia:
     == 1 ==========================
 \end{lstlisting}
 Zgodnie z powyższymi wynikami minimalny czas wykonania zadań może zostać skrócony do 32 jednostek czasu.
-Skróceniu ulega zadanie: \textbf{A} o 1 jednostkę czasu, 
+Skróceniu ulega zadanie: \textbf{A} o 1 jednostkę czasu,
 zadanie \textbf{B} o 5 jednostek czasu, zadaine \textbf{F} o 1.85 jednostek czasu
 oraz zadanie \textbf{J} o 0.85 jednostek czasu.
 \subsection{Dobór zadań przy wprowadzonym ograniczeniu NS}
