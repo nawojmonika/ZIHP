@@ -238,7 +238,9 @@ Czas potrzebny na przebycie ścieżki krytycznej to 44 jednostki czasu.
 W celu uzyskania minimalnego czasu wykonania całego przedsięwzięcia zadanie programowania liniowego
 zostało zapisane w języku modelowania AMPL.
 \lstinputlisting[caption=Model w języku AMPL]{./src/model-1.mod}
+Model został załączony w pliku \textit{model-1.mod}.
 \lstinputlisting[caption=Dane w języku AMPL]{./src/dane-1.dat}
+Dane zostały załączony w pliku \textit{dane-1.dat}.
 \begin{lstlisting}[caption=Rozwiązanie znalezione solwerem minos]
     MINOS 5.51: optimal solution found.
     5 iterations, objective 44
@@ -255,7 +257,7 @@ Rozwiązanie w formie harmonogramu zostało przedstawione na rysunku ~\ref{fig:h
 \end{figure}
 Harmonogram w formie wykresu Gantta został stworzony za pomocą aplikacji webowej o nazwie
 \href{https://app.instagantt.com/}{instagantt}, gdzie zostały dodane zadania
-w odpowiedniej kolejności, a jednostka czasu \(t\) to jeden dzień. 
+w odpowiedniej kolejności, a jednostka czasu \(t\) to jeden dzień.
 
 \subsection{Minimalny czas realizacji przedsięwzięcia przy określonym budżecie}
 W ogólnym przypadku dobieramy zadania do skrócenia sprawdzając czy ich skrócenie jest możliwe.
@@ -304,33 +306,34 @@ Defniujemy również dodatkowe ograniczenia:
     0 \leq tr_{ij} \leq td_{ij}
 \end{align*}
 \lstinputlisting[caption=Model w języku AMPL]{./src/model-2.mod}
+Model został załączony w pliku \textit{model-2.mod}.
 \lstinputlisting[caption=Dane w języku AMPL]{./src/dane-2.dat}
+Dane zostały załączony w pliku \textit{dane-2.dat}.
 \begin{lstlisting}[caption=Rozwiązanie znalezione solwerem minos]
     MINOS 5.51: ignoring integrality of 9 variables
     MINOS 5.51: optimal solution found.
-    12 iterations, objective 32.15
+    13 iterations, objective 36.53333333
     t_r :=
     0 1   0
-    0 2   1
+    0 2   2
     1 3   0
     1 4   0
     2 3   0
     2 9   0
-    3 5   0
+    3 5   0.466667
     4 6   0
     4 7   0
     5 6   0
     5 8   5
-    6 9   1.85
+    6 9   0
     7 8   0
-    8 9   0.85
+    8 9   0
     ;
     == 1 ==========================
 \end{lstlisting}
-Zgodnie z powyższymi wynikami minimalny czas wykonania zadań może zostać skrócony do 32 jednostek czasu.
-Skróceniu ulega zadanie: \textbf{A} o 1 jednostkę czasu,
-zadanie \textbf{B} o 5 jednostek czasu, zadaine \textbf{F} o 1.85 jednostek czasu
-oraz zadanie \textbf{J} o 0.85 jednostek czasu.
+Zgodnie z powyższymi wynikami minimalny czas wykonania zadań może zostać skrócony do 36.5 jednostek czasu.
+Skróceniu ulega zadanie: \textbf{A} o 2 jednostki czasu, zadanie \textbf{G} o 0.5 jednostek czasu 
+oraz zadanie \textbf{B} o 5 jednostek czasu.
 \subsection{Dobór zadań przy wprowadzonym ograniczeniu NS}
 \subsection{Najkrótszy czas wykonania przedsięwzięcia, gdy zadanie B nie może zakończyć się przed zakońćzeniem zadania A}
 \newpage
