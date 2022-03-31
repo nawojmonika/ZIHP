@@ -37,6 +37,7 @@
 \usepackage{listings} % Required for insertion of code
 
 \usepackage{enumerate} % To modify the enumerate environment
+\usepackage{enumitem}
 \usepackage{textcomp}
 \usepackage{amsmath}
 \usepackage{subcaption}
@@ -110,7 +111,132 @@
 %----------------------------------------------------------------------------------------
 
 \section{Treść projektu}
- 
+Celem ćwiczenia jest zapoznanie z zagadnieniami produkcji
+z mechanizmami aukcyjnymi.
+Wskazówka: W przypadku jednego (a w zasadzie dwóch) zadań nie warto
+wykorzystywać AMPLa.
+\subsection {Szeregowanie zadań na jednakowych procesorach równoległych}
+\subsubsection{Zadania podzielone}
+Na podstawie podanych danych \(n\) - liczba procesów,
+\(p_j\) - czaswykonania \(j\)-tego zadania, określić minimalny czas,
+w jakim można zakończyć wszystkie zadania (\(C_{max}\)).
+Stworzyć harmonogram realizujący wyznaczony czas.
+
+\subsubsection{Zadania niepodzielne}
+\begin{enumerate}[label=(\alph*)]
+    \item Mając dane: \(n\) - liczba procesów, \(p_j\) - czas wykonania
+          \(j\)-tego zadania, stworzyć model minimalizujący czas wykonania
+          wszystkich zadań (\(C_{max}\)). Porównać wynik z rozwiązaniem,
+          gdy zadania były podzielne.
+          Jaka zależność zachodzi w ogólnym przypadku między rozwiązaniami tych zadań?
+    \item Zaproponować regułę przydziału zadań minimalizującą czas
+          wykonania wszystkich zadań (\(C_{max}\)).
+          Porównać wynik z rozwiązaniem optymalnym - jaka zależność zachodzi w ogólnym przypadku?
+    \item  Mamy Rozwiązanie - niekoniecznie optymalne. Zaproponuj algorytm lokalnej poprawy rozwiązania.
+\end{enumerate}
+
+\subsection{Szeregowanie zadań na niejednorodowych procesorach równoległych}
+\subsubsection{Zadania podzielne}
+Mając dane \(p_{ij}\) — czas wykonania \(j\)-tego zadania na \(i\)-tym procesorze,
+zaproponuj model minimalizujący czas wykonania wszystkich zadań (\(C_{max}\)).
+\subsubsection{Zadania niepodzielne}
+\begin{enumerate}[label=(\alph*)]
+    \item Mając dane \(p_{ij}\) — czas wykonania j-tego zadania na i-tym procesorze,
+          zaproponuj model minimalizujący czas wykonania wszystkich
+          zadań (\(C_{max}\)).
+    \item Mając dane \(p_{ij}\) — czas wykonania j-tego zadania na i-tym procesorze,
+          zaproponuj model minimalizujący sumę czasów przebywania w
+          systemie (\(\sum F_j\))
+    \item czas wykonania j-tego zadania na i-tym procesorze,
+          zaproponuj model minimalizujący sumę czasów oczekiwania na obsługę.
+          (Wskazówka - czym różni ten punkt od poprzedniego)
+\end{enumerate}
+
+\subsection{Modernizacja oświetlenia}
+W związku ze wzrostem cen energii elektrycznej oraz zmianami cen źródeł światła mieszkaniowa rozważa modernizację oświetlenia. Rozważana jest
+modernizacja oświetlenia wejść do 3 klatek schodowych, w każdym wejściu
+mamy po dwie oprawy świetlówkowe 36W (rzeczywisty pobór mocy 44 W),
+obecnie do włączania wykorzystywana jest fotokomórka. Można oszacować
+że w roku włączane jest raz dziennie, a średni czas włączenia do 10h/dzień, w
+przypadku dodatkowego zastosowania czujników ruchu można się spodziewać
+średnio 150 włączeń/dzień, średni czas włączenia to 1,5 min.
+W istniejących oprawach świetlówkowych zostały zastosowane stateczniki elektromagnetyczne. Koszt wymiany przepalonych świetlówek z jednej
+oprawy to 10zł. Modernizacja może obejmować instalację czujników ruchu
+– jednorazowy wydatek 200zł na oprawę oraz modernizację źródeł światła,
+która może obejmować:
+\begin{itemize}
+    \item wymianę stateczników elektromagnetycznych na elektroniczne z ciepłym startem
+          – jednorazowy wydatek 140zł/szt., przy czym obniża się moc pojedynczej oprawy do 40W,
+    \item wymianę na oświetlenie LED, koszt zmiany to 200 zł, koszt wymiany
+          to 180 zł, skutkiem jest zmniejszenie mocy oprawy do 25W.
+\end{itemize}
+Wszystkie podane ceny to ceny brutto, WM płaci za energię elektryczną według taryfy G11.
+
+\textbf{Trwałość źrodeł światła} 
+Trwałość wszystkich źródeł światła jest modelowana
+w ten sam sposób – przeciętnie źródło światła trzeba wymienić, gdy
+wyrażenie \(\frac{H}{L_h} + \frac{S}{L_s}\)
+osiągnie wartość \(1\), gdzie \(H\) to liczba godzin pracy źródła,
+a \(S\) to liczba włączeń, parametry \(L_h\) i \(L_s\) można odczytać z tabeli poniżej.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c |}
+        \hline
+        Typ                          & \(L_h\) [h] & \(L_s\)       \\
+        \hline
+        świetlówka stat. elektromag. & 16 000      & 8 000         \\
+        świetlówka ciepły start      & 16 000      & 50 000        \\
+        Halogen                      & 3 000       & \( \infty  \) \\
+        LED                          & 50 000      & \( \infty  \) \\
+        \hline
+    \end{tabular}
+    \caption{Trwałość wszystkich źródeł światła}
+\end{table}
+
+\textbf{Zadanie} Wybierz miarę według której zostanie wybrany najlepszy wariant,
+określ długosc horyzontu (podaj uzasadnienie) i wybierz najlepszy wariant.
+Jako stopę dyskonta wybierz 10\%. Co się stanie, jeżeli będzie to 5\% lub 15
+\%.
+
+\subsection{Planowanie produkcji realizowanej w porcjach}
+W tym zadaniu celem jest zaplanowanie produkcji. Dane jest zapotrzebowanie na produkty końcowe, 
+które należy zaspokoić pod koniec określonych okresów czasu. Do wytworzenia poszczególnych produktów potrzebne
+są pewne półprodukty. Produkcja poszczególnych produktów trwa określony czas. 
+Produkcja charakteryzuje się stałym kosztem, który trzeba ponięść,
+jeżeli w danym okresie inicjujemy produkcję, tzn. w tym etapie są pobierane
+półprodukty potrzebne do produkcji, dana partia będzie dostępna po okresie 
+równym czasowi produkcji. Wszystkie produkty mogą być magazynowane,
+przy czym magazynowanie kosztuje.
+Należy określić, ile i kiedy, jakich wyrobów (równiez półproduktów) produkować.
+
+\begin{enumerate}
+    \item stwórz i rozwiąż model, opisujący warstwę wyrobów finalnych (koszty
+    wytworzenia półproduktów pomijamy)
+    \item stwórz i rozwiąż dokładny model (zadanie programowani liniowego mie-
+    szanego) opisujący całe zadanie.
+\end{enumerate}
+
+\subsection{Aukcje}
+Na aukcji zostało wystawionych n jednakowych przedmiotów. Oferty uczest-
+ników zostaną podane razem z pozostałymi danymi.
+
+\begin{enumerate}
+    \item wyznacz rozwiązanie aukcji niejawnej pierwszej ceny,
+    \item wyznacz rozwiązania aukcji Vicrey`a,
+    \item wyznacz rozwiązanie niejawnej aukcji jednolitej ceny (ceny pierwszej
+    odrzuconej oferty)
+    \item wyznacz rozwiązanie aukcji niejawnej pierwszej ceny, jesli wystawiają-
+    cy moąe poznać złożone oferty i zmniejszyć liczbę wystawianych przed-
+    miotów, w celu zwiększenia przychodu,
+    \item wyznacz rozwiązania aukcji Vicrey’a, jesli wystawiający może poznać
+    złożone oferty i zmniejszyć liczbę wystawianych przedmiotów, w celu
+    zwiększenia przychodu,
+    \item wyznacz rozwiązanie niejawnej aukcji jednolitej ceny (ceny pierwszej
+    odrzuconej oferty), jesli wystawiający może poznać złożone oferty i
+    zmniejszyć liczbę wystawianych przedmiotów, w celu zwiększenia przy-
+    chodu
+\end{enumerate}
+
 \newpage
 \section{Rozwiązanie}
 \end{document}
