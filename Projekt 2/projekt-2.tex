@@ -118,7 +118,7 @@ wykorzystywać AMPLa.
 \subsection {Szeregowanie zadań na jednakowych procesorach równoległych}
 \subsubsection{Zadania podzielone}
 Na podstawie podanych danych \(n\) - liczba procesów,
-\(p_j\) - czaswykonania \(j\)-tego zadania, określić minimalny czas,
+\(p_j\) - czas wykonania \(j\)-tego zadania, określić minimalny czas,
 w jakim można zakończyć wszystkie zadania (\(C_{max}\)).
 Stworzyć harmonogram realizujący wyznaczony czas.
 
@@ -342,7 +342,84 @@ Liczba przedmiotów \(n = 3\) \\
 \newpage
 \section{Rozwiązanie}
 \subsection{Szeregowanie zadań na jednakowych procesorach równoległych}
+Dane do zadania zostały zapisane w języku AMPL.
+\lstinputlisting[caption=Dane w języku AMPL]{./src/dane-1.dat}
+Dane zostały załączony w pliku \textit{dane-1.dat}.
 \subsubsection{Zadania podzielone}
+Zadanie to możemy zapisać w formie zadania programowania liniowego.
+Model przedstawia się następująco: \\
+\(x_{ij}\) - czas obsługi zadania \(j\) na procesorze \(i\) \\
+\(p_j\) - czas obsługi zadania j \\
+Funkcja celu: \\
+\(min C_max\) \\
+Przy ograniczeniach: \\
+\begin{align*}
+     & \sum^m_{j=1}x_{ij}p_j \leq C_{max} \\
+     & \sum^n_{i=1}x_{ij} \leq C_{max}    \\
+     & x_{ij} \geq 0, p_j \leq C_{max}    \\
+\end{align*}
+gdzie: \\
+\begin{align*}
+     & i = 1, ..., n \\
+     & j = 1, ..., m \\
+     & n = 2         \\
+     & m = 8
+\end{align*}
+
+\newpage
+
+\lstinputlisting[caption=Model w języku AMPL]{./src/model-1.mod}
+Model został załączony w pliku \textit{model-1.mod}.
+
+
+\begin{lstlisting}[caption=Rozwiązanie znalezione solwerem minos]
+    MINOS 5.51: optimal solution found.
+    4 iterations, objective 40
+    p :=
+    1 A    0
+    1 B    0
+    1 C    0
+    1 D    5
+    1 E   14
+    1 F    6
+    1 G    8
+    1 H    7
+    2 A   16
+    2 B   12
+    2 C    5
+    2 D    7
+    2 E    0
+    2 F    0
+    2 G    0
+    2 H    0
+    ;
+    == 1 ==========================
+\end{lstlisting}
+Zgodnie z wynikami wyznaczonymi przez solver MINOS wartość \(C_{max}\) wynosi 40 jednostek czasu.
+Jedynym podzielonym zadaniem jest \textbf{zadanie D}: 5 jednostek czasu zostaje obsłużone na \textit{procesorze 1}
+oraz 7 jednostek czasu zostaje obsłużone na \textit{procesorze 2}.
+Pozostałe zadania przedstawiają się następująco:
+\begin{itemize}
+    \item \textbf{zadanie A} zostaje w całości (16 jednostek czasu) obsłużone na \textit{procesorze 2},
+    \item \textbf{zadanie B} zostaje w całości (12 jednostek czasu) obsłużone na \textit{procesorze 2},
+    \item \textbf{zadanie C} zostaje w całości (7 jednostek czasu) obsłużone na \textit{procesorze 2},
+    \item \textbf{zadanie E} zostaje w całości (14 jednostek czasu) obsłużone na \textit{procesorze 1},
+    \item \textbf{zadanie F} zostaje w całości (6 jednostek czasu) obsłużone na \textit{procesorze 1},
+    \item \textbf{zadanie G} zostaje w całości (8 jednostek czasu) obsłużone na \textit{procesorze 1},
+    \item \textbf{zadanie H} zostaje w całości (7 jednostek czasu) obsłużone na \textit{procesorze 1},
+\end{itemize}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{./img/harmonogram-1.PNG}
+    \caption{Harmonogram realizujący wyznaczony czas}
+    \label{fig:harmonogram-1}
+\end{figure}
+
+Rysunek ~\ref{fig:harmonogram-1} przedstawia harmonogram wyznaczonego czasu
+w formie wykresu Gantta.
+
 \subsubsection{Zadania niepodzielone}
 
 \subsection{Szeregowanie zadań na niejednorodowych procesorach równoległych}
