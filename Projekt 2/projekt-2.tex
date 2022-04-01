@@ -346,16 +346,18 @@ Dane do zadania zostały zapisane w języku AMPL.
 \lstinputlisting[caption=Dane w języku AMPL]{./src/dane-1.dat}
 Dane zostały załączony w pliku \textit{dane-1.dat}.
 \subsubsection{Zadania podzielone}
-Zadanie to możemy zapisać w formie zadania programowania liniowego.
+Zadanie to możemy zapisać w formie zadania programowania liniowego. \\
 Model przedstawia się następująco: \\
-\(x_{ij}\) - czas obsługi zadania \(j\) na procesorze \(i\) \\
-\(p_j\) - czas obsługi zadania j \\
+\(x_{ij}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\
+\(p_j\) - czas przetwarzania zadania j \\ \\
 Funkcja celu: \\
-\(min C_max\) \\
+\begin{align*}
+    min \text{ } C_{max}
+\end{align*}
 Przy ograniczeniach: \\
 \begin{align*}
-     & \sum^m_{j=1}x_{ij}p_j \leq C_{max} \\
-     & \sum^n_{i=1}x_{ij} \leq C_{max}    \\
+     & \sum^n_{i=1}\sum^m_{j=1}x_{ij}p_j \leq C_{max} \\
+     & \sum^n_{i=1}\sum^m_{j=1}x_{ij} \leq C_{max}    \\
      & x_{ij} \geq 0, p_j \leq C_{max}    \\
 \end{align*}
 gdzie: \\
@@ -421,6 +423,79 @@ Rysunek ~\ref{fig:harmonogram-1} przedstawia harmonogram wyznaczonego czasu
 w formie wykresu Gantta.
 
 \subsubsection{Zadania niepodzielone}
+W przypadku zadania niepodzielnego model przedstawia się następująco: \\ \\
+Zmienne: \\
+\(x_{ij}\) - zmienna określająca obsłużenie zadania \(i\) na procesorze \(j\). \\ \\
+\(p_j\) - czas przetwarzania zadania j \\ \\
+Funkcja celu: \\
+\begin{align*}
+    min \text{ } C_{max}
+\end{align*}
+Przy ograniczeniach: \\
+\begin{align*}
+    & \sum^n_{i=1}\sum^m_{j=1}x_{ij}p_{ij} \leq C_{max} \\
+    & \sum^n_{i=1}\sum^m_{j=1}x_{ij} = 1 \\
+    & x \in  {0,1}
+\end{align*}
+gdzie: \\
+\begin{align*}
+     & i = 1, ..., n \\
+     & j = 1, ..., m \\
+     & n = 2         \\
+     & m = 8
+\end{align*}
+
+\lstinputlisting[caption=Model w języku AMPL]{./src/model-2.mod}
+Model został załączony w pliku \textit{model-2.mod}.
+
+\begin{lstlisting}[caption=Rozwiązanie znalezione solwerem lpsolve]
+    LP_SOLVE 4.0.1.0: optimal, objective 40
+    161 simplex iterations
+    129 branch & bound nodes: depth 9
+    p :=
+    1 A   0
+    1 B   0
+    1 C   1
+    1 D   0
+    1 E   1
+    1 F   1
+    1 G   1
+    1 H   1
+    2 A   1
+    2 B   1
+    2 C   0
+    2 D   1
+    2 E   0
+    2 F   0
+    2 G   0
+    2 H   0
+    ;
+    == 1 ==========================
+\end{lstlisting}
+Zgodnie z wynikami wyznaczonymi przez solver lpsolve wartość \(C_{max}\) nadal wynosi 40 jednostek czasu
+nawet przy niepodzielności zadań.
+
+Zadania zostały podzielone następująco na poszczególne procesory:
+\begin{itemize}
+    \item \textbf{zadanie A} zostaje obsłużone na \textit{procesorze 2},
+    \item \textbf{zadanie B} zostaje obsłużone na \textit{procesorze 2},
+    \item \textbf{zadanie C} zostaje obsłużone na \textit{procesorze 1},
+    \item \textbf{zadanie D} zostaje obsłużone na \textit{procesorze 2},
+    \item \textbf{zadanie E} zostaje obsłużone na \textit{procesorze 1},
+    \item \textbf{zadanie F} zostaje obsłużone na \textit{procesorze 1},
+    \item \textbf{zadanie G} zostaje obsłużone na \textit{procesorze 1},
+    \item \textbf{zadanie H} zostaje obsłużone na \textit{procesorze 1},
+\end{itemize}
+
+Porównując rozwiązanie zadania podzielnego i nie podzielnego,
+oczywistą różnicą jest przydzielenie \textbf{zadania D} do tylko jednego procesora,
+którym jest \textit{procesor 2},
+Kolejną różnicą jest przetworzenie \textbf{zadania C} w wariancie podzielnym
+na \textit{procesorze 2}, natomiast w wariancie niepodzielnym na \textit{procesorze 1}.
+Całkowity czas przetwarzania wszystkich zadań jest niezmienny niezależnie od wariantu.
+\\ \\
+Proponowaną regułą przydziału zadań minimalizującąn czas wykonywania wszystkich
+zadań (\(C_{nax}\) jest szeregowanie listowe przy użyciu zasady LPT.
 
 \subsection{Szeregowanie zadań na niejednorodowych procesorach równoległych}
 \subsubsection{Zadania podzielone}
