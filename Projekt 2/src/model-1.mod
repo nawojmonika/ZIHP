@@ -1,13 +1,15 @@
-set n;
-set zadania;
-param czas{zadania};
-var p{n, zadania} >=0;
+set T;
+set L;
+param p{T};
+var x{L, T} >=0;
 var Cmax >= 0;
-minimize T: Cmax;
+minimize c_max: Cmax;
 
-subject to c1{j in zadania}:
-sum {i in n} p[i,j] = czas[j];
-subject to c2{i in n}:
-sum {j in zadania} p[i,j] <= Cmax;
-subject to c3{j in zadania}:
-sum {i in n} p[i,j] <= Cmax;
+subject to c1{j in T}:
+sum {i in L} x[i,j] = p[j];
+
+subject to c2{i in L}:
+sum {j in T} x[i,j] <= Cmax;
+
+subject to c3{j in T}:
+sum {i in L} x[i,j] <= Cmax;

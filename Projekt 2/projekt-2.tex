@@ -116,7 +116,7 @@ z mechanizmami aukcyjnymi.
 Wskazówka: W przypadku jednego (a w zasadzie dwóch) zadań nie warto
 wykorzystywać AMPLa.
 \subsection {Szeregowanie zadań na jednakowych procesorach równoległych}
-\subsubsection{Zadania podzielone}
+\subsubsection{Zadania podzielne}
 Na podstawie podanych danych \(n\) - liczba procesów,
 \(p_j\) - czas wykonania \(j\)-tego zadania, określić minimalny czas,
 w jakim można zakończyć wszystkie zadania (\(C_{max}\)).
@@ -153,13 +153,14 @@ zaproponuj model minimalizujący czas wykonania wszystkich zadań (\(C_{max}\)).
 \end{enumerate}
 
 \subsection{Modernizacja oświetlenia}
-W związku ze wzrostem cen energii elektrycznej oraz zmianami cen źródeł światła mieszkaniowa rozważa modernizację oświetlenia. Rozważana jest
-modernizacja oświetlenia wejść do 3 klatek schodowych, w każdym wejściu
+W związku ze wzrostem cen energii elektrycznej oraz zmianami cen źródeł światła wspólnota mieszkaniowa rozważa modernizację oświetlenia. 
+Rozważana jest modernizacja oświetlenia wejść do 3 klatek schodowych, w każdym wejściu
 mamy po dwie oprawy świetlówkowe 36W (rzeczywisty pobór mocy 44 W),
 obecnie do włączania wykorzystywana jest fotokomórka. Można oszacować
 że w roku włączane jest raz dziennie, a średni czas włączenia do 10h/dzień, w
 przypadku dodatkowego zastosowania czujników ruchu można się spodziewać
 średnio 150 włączeń/dzień, średni czas włączenia to 1,5 min.
+
 W istniejących oprawach świetlówkowych zostały zastosowane stateczniki elektromagnetyczne. Koszt wymiany przepalonych świetlówek z jednej
 oprawy to 10zł. Modernizacja może obejmować instalację czujników ruchu
 – jednorazowy wydatek 200zł na oprawę oraz modernizację źródeł światła,
@@ -195,8 +196,7 @@ a \(S\) to liczba włączeń, parametry \(L_h\) i \(L_s\) można odczytać z tab
 
 \textbf{Zadanie} Wybierz miarę według której zostanie wybrany najlepszy wariant,
 określ długosc horyzontu (podaj uzasadnienie) i wybierz najlepszy wariant.
-Jako stopę dyskonta wybierz 10\%. Co się stanie, jeżeli będzie to 5\% lub 15
-\%.
+Jako stopę dyskonta wybierz 10\%. Co się stanie, jeżeli będzie to 5\% lub 15\%.
 
 \subsection{Planowanie produkcji realizowanej w porcjach}
 W tym zadaniu celem jest zaplanowanie produkcji. Dane jest zapotrzebowanie na produkty końcowe,
@@ -238,7 +238,6 @@ ników zostaną podane razem z pozostałymi danymi.
 \end{enumerate}
 \newpage
 \section{Dane}
-
 \subsection{Procesy jednakowe}
 \begin{itemize}
     \item liczba procesów \(n = 2\)
@@ -344,28 +343,25 @@ Liczba przedmiotów \(n = 3\) \\
 \subsection{Szeregowanie zadań na jednakowych procesorach równoległych}
 Dane do zadania zostały zapisane w języku AMPL.
 \lstinputlisting[caption=Dane w języku AMPL]{./src/dane-1.dat}
-Dane zostały załączony w pliku \textit{dane-1.dat}.
-\subsubsection{Zadania podzielone}
-Zadanie to możemy zapisać w formie zadania programowania liniowego. \\
-Model przedstawia się następująco: \\
+Dane zostały załączone w pliku \textit{dane-1.dat}.
+\subsubsection{Zadania podzielne}
+Problem przestawiony w niniejszym zadaniu jest problemem \(P|pmtn|C_{max}\) 
+tj. problem szeregowania podzielnych i niezależnych zadań na dwóch procesorach z kryterium \(C_{max}\). \\
+Model matematyczny przedstawia się następująco: \\ \\
+Parametry modelu: \\
 \(x_{ij}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\
-\(p_j\) - czas przetwarzania zadania j \\ \\
+\(p_j\) - czas przetwarzania zadania \(j\) \\ \\
+Zmienne decyzyjne: \\
+\(C_{max}\) - zmienna określająca maksymalny czas przetwarzania zadań na obu procesorach \\ \\
 Funkcja celu: \\
 \begin{align*}
     min \text{ } C_{max}
 \end{align*}
 Przy ograniczeniach: \\
 \begin{align*}
-     & \sum^n_{i=1}\sum^m_{j=1}x_{ij}p_j \leq C_{max} \\
-     & \sum^n_{i=1}\sum^m_{j=1}x_{ij} \leq C_{max}    \\
-     & x_{ij} \geq 0, p_j \leq C_{max}    \\
-\end{align*}
-gdzie: \\
-\begin{align*}
-     & i = 1, ..., n \\
-     & j = 1, ..., m \\
-     & n = 2         \\
-     & m = 8
+     & \sum^i_{j=1}x_{ij} = p_j \leq C_{max} \\
+     & \sum^j_{i=1}x_{ij} \leq C_{max}    \\
+     & \sum^i_{j=1}x_{ij} \leq C_{max}    \\
 \end{align*}
 
 \newpage
@@ -377,7 +373,7 @@ Model został załączony w pliku \textit{model-1.mod}.
 \begin{lstlisting}[caption=Rozwiązanie znalezione solwerem minos]
     MINOS 5.51: optimal solution found.
     4 iterations, objective 40
-    p :=
+    x :=
     1 A    0
     1 B    0
     1 C    0
@@ -498,7 +494,19 @@ Proponowaną regułą przydziału zadań minimalizującąn czas wykonywania wszy
 zadań (\(C_{nax}\) jest szeregowanie listowe przy użyciu zasady LPT.
 
 \subsection{Szeregowanie zadań na niejednorodowych procesorach równoległych}
-\subsubsection{Zadania podzielone}
+\subsubsection{Zadania podzielne}
+Model dla tego zadania został zdefiniowany w następujący sposób: \\
+\(N\) - zadania \\
+\(P\) - procesory \\
+\\
+Zmienne: \\
+\(p_{ij}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\
+\\
+Funkcja celu: \\
+\begin{align*}
+    \text{min } C_{max}
+\end{align*}
+% TO DO
 \subsubsection{Zadania niepodzielone}
 
 \subsection{Modernizacja oświetlenia}
