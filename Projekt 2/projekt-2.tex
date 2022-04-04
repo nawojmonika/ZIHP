@@ -124,15 +124,15 @@ Stworzyć harmonogram realizujący wyznaczony czas.
 
 \subsubsection{Zadania niepodzielne}
 \begin{enumerate}[label=(\alph*)]
-    \item Mając dane: \(n\) - liczba procesów, \(p_j\) - czas wykonania
+    \item \label{12a} Mając dane: \(n\) - liczba procesów, \(p_j\) - czas wykonania
           \(j\)-tego zadania, stworzyć model minimalizujący czas wykonania
           wszystkich zadań (\(C_{max}\)). Porównać wynik z rozwiązaniem,
           gdy zadania były podzielne.
           Jaka zależność zachodzi w ogólnym przypadku między rozwiązaniami tych zadań?
-    \item Zaproponować regułę przydziału zadań minimalizującą czas
+    \item \label{12b} Zaproponować regułę przydziału zadań minimalizującą czas
           wykonania wszystkich zadań (\(C_{max}\)).
           Porównać wynik z rozwiązaniem optymalnym - jaka zależność zachodzi w ogólnym przypadku?
-    \item  Mamy Rozwiązanie - niekoniecznie optymalne. Zaproponuj algorytm lokalnej poprawy rozwiązania.
+    \item \label{12c} Mamy Rozwiązanie - niekoniecznie optymalne. Zaproponuj algorytm lokalnej poprawy rozwiązania.
 \end{enumerate}
 
 \subsection{Szeregowanie zadań na niejednorodowych procesorach równoległych}
@@ -362,6 +362,7 @@ Przy ograniczeniach: \\
      & \sum^i_{j=1}x_{ij} = p_j \leq C_{max} \\
      & \sum^j_{i=1}x_{ij} \leq C_{max}    \\
      & \sum^i_{j=1}x_{ij} \leq C_{max}    \\
+     & x_{ij} \geq 0
 \end{align*}
 
 \newpage
@@ -416,29 +417,30 @@ Pozostałe zadania przedstawiają się następująco:
 \end{figure}
 
 Rysunek ~\ref{fig:harmonogram-1} przedstawia harmonogram wyznaczonego czasu
-w formie wykresu Gantta.
+w formie wykresu Gantta, gdzie jedna jednostka czasu jest równa jednemu dniowi.
 
 \subsubsection{Zadania niepodzielone}
-W przypadku zadania niepodzielnego model przedstawia się następująco: \\ \\
-Zmienne: \\
-\(x_{ij}\) - zmienna określająca obsłużenie zadania \(i\) na procesorze \(j\). \\ \\
-\(p_j\) - czas przetwarzania zadania j \\ \\
+\par\noindent\rule{\textwidth}{0.4pt}
+    Podpunkt \ref{12a}
+\par\noindent\rule{\textwidth}{0.4pt}
+W przypadku zadania niepodzielnego jest to problem \(P||C_{max}\) 
+tj. problem zadań niepodzielnych na dwóch procesorach z kryterium \(C_{max}\). \\
+Model przedstawia się następująco: \\ \\
+Parametry modelu: \\
+\(x_{ij}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\
+\(p_j\) - czas przetwarzania zadania \(j\) \\ \\
+Zmienne decyzyjne: \\
+\(C_{max}\) - zmienna określająca maksymalny czas przetwarzania zadań na obu procesorach \\ \\
 Funkcja celu: \\
 \begin{align*}
     min \text{ } C_{max}
 \end{align*}
+\newpage
 Przy ograniczeniach: \\
 \begin{align*}
-    & \sum^n_{i=1}\sum^m_{j=1}x_{ij}p_{ij} \leq C_{max} \\
-    & \sum^n_{i=1}\sum^m_{j=1}x_{ij} = 1 \\
+    & \sum^j_{i=1}x_{ij} \cdot p_j \leq C_{max} \\
+    & \sum^i_{j=1}x_{ij} = 1 \\
     & x \in  {0,1}
-\end{align*}
-gdzie: \\
-\begin{align*}
-     & i = 1, ..., n \\
-     & j = 1, ..., m \\
-     & n = 2         \\
-     & m = 8
 \end{align*}
 
 \lstinputlisting[caption=Model w języku AMPL]{./src/model-2.mod}
@@ -448,7 +450,7 @@ Model został załączony w pliku \textit{model-2.mod}.
     LP_SOLVE 4.0.1.0: optimal, objective 40
     161 simplex iterations
     129 branch & bound nodes: depth 9
-    p :=
+    x :=
     1 A   0
     1 B   0
     1 C   1
@@ -471,6 +473,8 @@ Model został załączony w pliku \textit{model-2.mod}.
 Zgodnie z wynikami wyznaczonymi przez solver lpsolve wartość \(C_{max}\) nadal wynosi 40 jednostek czasu
 nawet przy niepodzielności zadań.
 
+\newpage
+
 Zadania zostały podzielone następująco na poszczególne procesory:
 \begin{itemize}
     \item \textbf{zadanie A} zostaje obsłużone na \textit{procesorze 2},
@@ -489,24 +493,29 @@ którym jest \textit{procesor 2},
 Kolejną różnicą jest przetworzenie \textbf{zadania C} w wariancie podzielnym
 na \textit{procesorze 2}, natomiast w wariancie niepodzielnym na \textit{procesorze 1}.
 Całkowity czas przetwarzania wszystkich zadań jest niezmienny niezależnie od wariantu.
-\\ \\
-Proponowaną regułą przydziału zadań minimalizującąn czas wykonywania wszystkich
-zadań (\(C_{nax}\) jest szeregowanie listowe przy użyciu zasady LPT.
+\par\noindent\rule{\textwidth}{0.4pt}
+    Podpunkt \ref{12b}
+\par\noindent\rule{\textwidth}{0.4pt}
+Proponowaną regułą przydziału zadań minimalizującą czas wykonywania wszystkich
+zadań \(C_{max}\) jest szeregowanie listowe przy użyciu zasady LPT (ang. \textit{Longest Processing Time}).
+Metoda ta pozwala wybór kolejności zadań według ustalonej listy priorytetów.
+Po zakończeniu przetwarzania pierwszych zadań i zwolnieniu zasobów
+procesorów, przydzielane jest kolejne zadanie z listy do procesora, 
+który gwarantuje najwcześniejszy czas ukończenia zadania.
+
+\par\noindent\rule{\textwidth}{0.4pt}
+    Podpunkt \ref{12c}
+\par\noindent\rule{\textwidth}{0.4pt}
+W przypadku zadania niekoniecznie optymalnego w przypadku problemu \(P||C_{max}\)
+należy wykorzystać metodę \textbf{LPT} zgodnie z wykładem:
+\begin{quote}
+    W przypadku Problemu \(P ||C_{max}\) najlepszy wartiant algorytmu szeregowania listowego LS wykorzystuje regułę priorytetową LPT. 
+    Wtedy długość uszeregowania \(C_{max}\) jest w najgorszym przypadku nie gorsza od optymalnej wartości \(C_{max}\)
+    co najwyżej \( (\frac{4}{3} - \frac{1}{3m} )\) razy.
+\end{quote}
 
 \subsection{Szeregowanie zadań na niejednorodowych procesorach równoległych}
 \subsubsection{Zadania podzielne}
-Model dla tego zadania został zdefiniowany w następujący sposób: \\
-\(N\) - zadania \\
-\(P\) - procesory \\
-\\
-Zmienne: \\
-\(p_{ij}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\
-\\
-Funkcja celu: \\
-\begin{align*}
-    \text{min } C_{max}
-\end{align*}
-% TO DO
 \subsubsection{Zadania niepodzielone}
 
 \subsection{Modernizacja oświetlenia}
