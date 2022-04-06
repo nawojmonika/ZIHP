@@ -358,13 +358,16 @@ Funkcja celu: \\
 \end{align*}
 Przy ograniczeniach: \\
 \begin{align*}
-     & \sum^i_{j=1}x_{ij} = p_j \leq C_{max} \\
-     & \sum^j_{i=1}x_{ij} \leq C_{max}       \\
-     & \sum^i_{j=1}x_{ij} \leq C_{max}       \\
+     & \sum^m_{j=1}x_{ij} = p_j \leq C_{max} \\
+     & \sum^n_{i=1}x_{ij} \leq C_{max}       \\
+     & \sum^m_{j=1}x_{ij} \leq C_{max}       \\
      & x_{ij} \geq 0
 \end{align*}
-
-\newpage
+gdzie:
+\begin{align*}
+     & j = 1, ..., m; \\
+     & i = 1, ..., n;
+\end{align*}
 
 \lstinputlisting[caption=Model w języku AMPL]{./src/model-1.mod}
 Model został załączony w pliku \textit{model-1.mod}.
@@ -441,9 +444,14 @@ Funkcja celu: \\
 \newpage
 Przy ograniczeniach: \\
 \begin{align*}
-     & \sum^j_{i=1}x_{ij} \cdot p_j \leq C_{max} \\
-     & \sum^i_{j=1}x_{ij} = 1                    \\
+     & \sum^m_{i=1}x_{ij} \cdot p_j \leq C_{max} \\
+     & \sum^n_{j=1}x_{ij} = 1                    \\
      & x \in  {0,1}
+\end{align*}
+gdzie:
+\begin{align*}
+     & j = 1, ..., m; \\
+     & i = 1, ..., n;
 \end{align*}
 
 \lstinputlisting[caption=Model w języku AMPL]{./src/model-2.mod}
@@ -544,14 +552,19 @@ Funkcja celu: \\
 \end{align*}
 Przy ograniczeniach: \\
 \begin{align*}
-     & \sum^j_{i=1} \frac{x_{ij}}{p_j}  \\
-     & \sum^i_{j=1} x_{ij} \leq C_{max} \\
-     & \sum^j_{i=1} x_{ij} \leq C_{max} \\
+     & \sum^m_{i=1} \frac{x_{ij}}{p_j}  \\
+     & \sum^n_{j=1} x_{ij} \leq C_{max} \\
+     & \sum^m_{i=1} x_{ij} \leq C_{max} \\
 \end{align*}
-
+gdzie:
+\begin{align*}
+     & j = 1, ..., m; \\
+     & i = 1, ..., n;
+\end{align*}
 \lstinputlisting[caption=Model w języku AMPL]{./src/model-3.mod}
 Model został załączony w pliku \textit{model-3.mod}.
 
+\newpage
 
 \begin{lstlisting}[caption=Rozwiązanie znalezione solwerem lpsolve]
     LP_SOLVE 4.0.1.0: optimal, objective 37.2
@@ -615,13 +628,17 @@ Funkcja celu: \\
 \end{align*}
 Przy ograniczeniach: \\
 \begin{align*}
-     & \sum^j_{i=1} p_{ji} \cdot x_{ij} \leq C_{max} \\
-     & \sum^i_{j=1} x_{ij} = 1                       \\
-     & x_{ij} \in 0,1                                \\
+     & \sum^m_{i=1} p_{ji} \cdot x_{ij} \leq C_{max} \\
+     & \sum^n_{j=1} x_{ij} = 1                       \\
+     & x_{ij} \in  \{0,1\}                           \\
+\end{align*}
+gdzie:
+\begin{align*}
+     & j = 1, ..., m; \\
+     & i = 1, ..., n;
 \end{align*}
 
 \newpage
-
 \lstinputlisting[caption=Model w języku AMPL]{./src/model-4.mod}
 Model został załączony w pliku \textit{model-4.mod}.
 
@@ -659,11 +676,11 @@ Dla ułatwienia przedstawiam dodatkowo rozwiązanie w formie tabeli.
     \centering
     \begin{tabular}{| c | c | c | c | c | c | c | c | c |}
         \hline
-        Zadanie    & A & B    & C & D & E  & F  & G & H \\
+        Zadanie    & A & B  & C & D & E  & F  & G & H \\
         \hline
-        Procesor 1 &   &  & 5 &   &  12  & 12 &   & 9 \\
+        Procesor 1 &   &    & 5 &   & 12 & 12 &   & 9 \\
         \hline
-        Procesor 2 & 9 & 14  &   & 9 &  &    & 4 &   \\
+        Procesor 2 & 9 & 14 &   & 9 &    &    & 4 &   \\
         \hline
     \end{tabular}
     \caption{Czas przetwarzania poszczególnych zadań na wybranych procesorach}
@@ -674,6 +691,36 @@ Dla ułatwienia przedstawiam dodatkowo rozwiązanie w formie tabeli.
 \par\noindent\rule{\textwidth}{0.4pt}
 Podpunkt \ref{22b}
 \par\noindent\rule{\textwidth}{0.4pt}
+W przedstawionym zadaniu minimalizujemy czas przetwarzania \textit{j-tego}
+zadania na \textit{i-tym} procesorze.
+Rozwiązanie tego problemu możemy znaleźć za pomocą reguły SPT (ang. \textit{Shortest Processing Time}).
+Metoda ta pozwala na uszeregowanie zadań w kolejności rosnącego czasu przetwarzania zadania \(p_j\).
+Wartość funkcji celu \(\sum F_j\) dla uzyskanego zbioru możemy zilutstrować jako pole pod wykresen.
+Uszeregowane zadania wykonywane są w kolejności od najkrótszego do najdłuższego,
+oznacza to iż cel minimalizacji czasu przetwarzania na procesorze zostaje osiagnięty.
+
+Model matematyczny przedstawia się następująco: \\ \\
+Parametry modelu: \\
+\(p_{ji}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\ \\
+\(o_{k}\) - kolejność przetwarzania zadań \\ \\
+Zmienne decyzyjne: \\
+\(x_{ijk}\) - czas przetwarzania na procesorze \(i\) zadania \(j\) \\
+\(C_{max}\) - zmienna określająca maksymalny czas przetwarzania zadań na obu procesorach \\ \\
+Funkcja celu: \\
+\begin{align*}
+    min \sum^m_{i=1}\sum^n_{j=1}\sum^n_{k=1} k \cdot p_{ji} \cdot x_{ijk}
+\end{align*}
+Przy ograniczeniach: \\
+\begin{align*}
+     & \sum^m_{i=1} \sum^n_{j=1} x_{ijk} = 1 \\
+     & \sum^n_{j=1} x_{ijk} \leq 1           \\
+     & x_{ijk} \in  \{0,1\}                  \\
+\end{align*}
+\begin{align*}
+     & j = 1, ..., m; \\
+     & i = 1, ..., n;
+     & k = 1, ..., n;
+\end{align*}
 
 \par\noindent\rule{\textwidth}{0.4pt}
 Podpunkt \ref{22c}
