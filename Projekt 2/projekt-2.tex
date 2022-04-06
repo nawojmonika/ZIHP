@@ -722,6 +722,65 @@ Przy ograniczeniach: \\
      & k = 1, ..., n;
 \end{align*}
 
+\newpage
+
+Dane do zadania zostały zapisane w języku AMPL.
+\lstinputlisting[caption=Dane w języku AMPL]{./src/dane-3.dat}
+Dane zostały załączone w pliku \textit{dane-3.dat}.
+
+\lstinputlisting[caption=Model w języku AMPL]{./src/model-5.mod}
+Model został załączony w pliku \textit{model-5.mod}.
+
+\newpage
+
+\begin{lstlisting}[caption=Rozwiązanie znalezione solwerem lpsolve]
+    LP_SOLVE 4.0.1.0: optimal, objective 158
+    21 simplex iterations
+    x [1,*,*]
+    :   1   2   3   4   5   6   7   8    :=
+    A   0   0   0   0   0   0   0   0
+    B   1   0   0   0   0   0   0   0
+    C   0   0   0   1   0   0   0   0
+    D   0   0   0   0   0   0   0   0
+    E   0   0   0   0   0   0   0   0
+    F   0   1   0   0   0   0   0   0
+    G   0   0   0   0   0   0   0   0
+    H   0   0   1   0   0   0   0   0
+    
+     [2,*,*]
+    :   1   2   3   4   5   6   7   8    :=
+    A   0   0   1   0   0   0   0   0
+    B   0   0   0   0   0   0   0   0
+    C   0   0   0   0   0   0   0   0
+    D   0   1   0   0   0   0   0   0
+    E   1   0   0   0   0   0   0   0
+    F   0   0   0   0   0   0   0   0
+    G   0   0   0   1   0   0   0   0
+    H   0   0   0   0   0   0   0   0
+    ;
+    == 1 ==========================
+\end{lstlisting}
+
+Kolejność wykonywania zadań wyznaczona przez solver lpsolve
+oznacza kolejność wykonywanych zadań od końca.
+Poniżej przedstawiam interpretacje wyników w formie tabeli:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c | c | c | c |}
+        \hline
+        Zadanie    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+        \hline
+        Procesor 1 & C & H & F & B &   &   &   &   \\
+        \hline
+        Procesor 2 & G & A & D & E &   &   &   &   \\
+        \hline
+    \end{tabular}
+    \caption{Koleność przetwarzania poszczególnych zadań na wybranych procesorach}
+\end{table}
+
+\newpage
+
 \par\noindent\rule{\textwidth}{0.4pt}
 Podpunkt \ref{22c}
 \par\noindent\rule{\textwidth}{0.4pt}
