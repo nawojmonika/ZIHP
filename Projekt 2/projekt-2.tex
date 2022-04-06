@@ -348,7 +348,7 @@ Problem przestawiony w niniejszym zadaniu jest problemem \(P|pmtn|C_{max}\)
 tj. problem szeregowania podzielnych i niezależnych zadań na dwóch procesorach z kryterium \(C_{max}\). \\
 Model matematyczny przedstawia się następująco: \\ \\
 Parametry modelu: \\
-\(x_{ij}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\
+\(x_{ij}\) - czas przetwarzania na procesorze \(i\) zadania \(j\) \\
 \(p_j\) - czas przetwarzania zadania \(j\) \\ \\
 Zmienne decyzyjne: \\
 \(C_{max}\) - zmienna określająca maksymalny czas przetwarzania zadań na obu procesorach \\ \\
@@ -396,16 +396,20 @@ Model został załączony w pliku \textit{model-1.mod}.
 Zgodnie z wynikami wyznaczonymi przez solver MINOS wartość \(C_{max}\) wynosi 40 jednostek czasu.
 Jedynym podzielonym zadaniem jest \textbf{zadanie D}: 5 jednostek czasu zostaje obsłużone na \textit{procesorze 1}
 oraz 7 jednostek czasu zostaje obsłużone na \textit{procesorze 2}.
-Pozostałe zadania przedstawiają się następująco:
-\begin{itemize}
-    \item \textbf{zadanie A} zostaje w całości (16 jednostek czasu) obsłużone na \textit{procesorze 2},
-    \item \textbf{zadanie B} zostaje w całości (12 jednostek czasu) obsłużone na \textit{procesorze 2},
-    \item \textbf{zadanie C} zostaje w całości (7 jednostek czasu) obsłużone na \textit{procesorze 2},
-    \item \textbf{zadanie E} zostaje w całości (14 jednostek czasu) obsłużone na \textit{procesorze 1},
-    \item \textbf{zadanie F} zostaje w całości (6 jednostek czasu) obsłużone na \textit{procesorze 1},
-    \item \textbf{zadanie G} zostaje w całości (8 jednostek czasu) obsłużone na \textit{procesorze 1},
-    \item \textbf{zadanie H} zostaje w całości (7 jednostek czasu) obsłużone na \textit{procesorze 1},
-\end{itemize}
+Dla ułatwienia przedstawiam dodatkowo rozwiązanie w formie tabeli.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c | c | c | c |}
+        \hline
+        Zadanie    & A  & B  & C & D & E  & F & G & H \\
+        \hline
+        Procesor 1 &    &    &   & 5 & 14 & 6 & 8 & 7 \\
+        \hline
+        Procesor 2 & 16 & 12 & 7 & 7 &    &   &   &   \\
+        \hline
+    \end{tabular}
+    \caption{Czas przetwarzania poszczególnych zadań na wybranych procesorach}
+\end{table}
 
 
 \begin{figure}[H]
@@ -426,7 +430,7 @@ W przypadku zadania niepodzielnego jest to problem \(P||C_{max}\)
 tj. problem zadań niepodzielnych na dwóch procesorach z kryterium \(C_{max}\). \\
 Model przedstawia się następująco: \\ \\
 Parametry modelu: \\
-\(x_{ij}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\
+\(x_{ij}\) - czas przetwarzania na procesorze \(i\) zadania \(j\) \\
 \(p_j\) - czas przetwarzania zadania \(j\) \\ \\
 Zmienne decyzyjne: \\
 \(C_{max}\) - zmienna określająca maksymalny czas przetwarzania zadań na obu procesorach \\ \\
@@ -474,17 +478,20 @@ nawet przy niepodzielności zadań.
 
 \newpage
 
-Zadania zostały podzielone następująco na poszczególne procesory:
-\begin{itemize}
-    \item \textbf{zadanie A} zostaje obsłużone na \textit{procesorze 2},
-    \item \textbf{zadanie B} zostaje obsłużone na \textit{procesorze 2},
-    \item \textbf{zadanie C} zostaje obsłużone na \textit{procesorze 1},
-    \item \textbf{zadanie D} zostaje obsłużone na \textit{procesorze 2},
-    \item \textbf{zadanie E} zostaje obsłużone na \textit{procesorze 1},
-    \item \textbf{zadanie F} zostaje obsłużone na \textit{procesorze 1},
-    \item \textbf{zadanie G} zostaje obsłużone na \textit{procesorze 1},
-    \item \textbf{zadanie H} zostaje obsłużone na \textit{procesorze 1},
-\end{itemize}
+Dla ułatwienia przedstawiam dodatkowo rozwiązanie w formie tabeli.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c | c | c | c |}
+        \hline
+        Zadanie    & A  & B  & C & D  & E  & F & G & H \\
+        \hline
+        Procesor 1 &    &    & 7 &    & 14 & 6 & 8 & 7 \\
+        \hline
+        Procesor 2 & 16 & 12 &   & 12 &    &   &   &   \\
+        \hline
+    \end{tabular}
+    \caption{Czas przetwarzania poszczególnych zadań na wybranych procesorach}
+\end{table}
 
 Porównując rozwiązanie zadania podzielnego i nie podzielnego,
 oczywistą różnicą jest przydzielenie \textbf{zadania D} do tylko jednego procesora,
@@ -527,8 +534,8 @@ na \(m\) procesorach równoległych, gdzie:
 \end{align*}
 Model matematyczny przedstawia się następująco: \\ \\
 Parametry modelu: \\
-\(x_{ij}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\
-\(p_{ji}\) - czas przetwarzania zadania \(j\) \\ \\
+\(x_{ij}\) - czas przetwarzania na procesorze \(i\) zadania \(j\) \\
+\(p_{ji}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\ \\
 Zmienne decyzyjne: \\
 \(C_{max}\) - zmienna określająca maksymalny czas przetwarzania zadań na obu procesorach \\ \\
 Funkcja celu: \\
@@ -573,8 +580,104 @@ Solwer lpsolve wyznaczył wartość \(C_{max}\) wynoszącą \(37.2\) jednostki c
 Warto zauważyć, że jedynym podzielonym zadaniem jest \textbf{zadanie B},
 pozostałe zadania zostały wykonane w całości na jednym, wybranym procesorze.
 
+Dla ułatwienia przedstawiam dodatkowo rozwiązanie w formie tabeli.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c | c | c | c |}
+        \hline
+        Zadanie    & A & B    & C & D & E  & F  & G & H \\
+        \hline
+        Procesor 1 &   & 11.2 & 5 &   &    & 12 &   & 9 \\
+        \hline
+        Procesor 2 & 9 & 3.2  &   & 9 & 12 &    & 4 &   \\
+        \hline
+    \end{tabular}
+    \caption{Czas przetwarzania poszczególnych zadań na wybranych procesorach}
+\end{table}
 
 \subsubsection{Zadania niepodzielne}
+
+\par\noindent\rule{\textwidth}{0.4pt}
+Podpunkt \ref{22a}
+\par\noindent\rule{\textwidth}{0.4pt}
+Przedstawiony w treści zadania problem jest problemem \(R||C_{max}\),
+jego rozwiązanie możemy znaleźć poprzez rozwiązanie zadania programowania liniowego
+ze zmiennymi binarnymi. \\
+Model matematyczny przedstawia się następująco: \\ \\
+Parametry modelu: \\
+\(x_{ij}\) - czas przetwarzania na procesorze \(i\) zadania \(j\) \\
+\(p_{ji}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\ \\
+Zmienne decyzyjne: \\
+\(C_{max}\) - zmienna określająca maksymalny czas przetwarzania zadań na obu procesorach \\ \\
+Funkcja celu: \\
+\begin{align*}
+    min \text{ } C_{max}
+\end{align*}
+Przy ograniczeniach: \\
+\begin{align*}
+     & \sum^j_{i=1} p_{ji} \cdot x_{ij} \leq C_{max} \\
+     & \sum^i_{j=1} x_{ij} = 1                       \\
+     & x_{ij} \in 0,1                                \\
+\end{align*}
+
+\newpage
+
+\lstinputlisting[caption=Model w języku AMPL]{./src/model-4.mod}
+Model został załączony w pliku \textit{model-4.mod}.
+
+
+\begin{lstlisting}[caption=Rozwiązanie znalezione solwerem lpsolve]
+    LP_SOLVE 4.0.1.0: optimal, objective 40
+    62 simplex iterations
+    39 branch & bound nodes: depth 8
+    x :=
+    1 A   0
+    1 B   0
+    1 C   1
+    1 D   0
+    1 E   1
+    1 F   1
+    1 G   0
+    1 H   1
+    2 A   1
+    2 B   1
+    2 C   0
+    2 D   1
+    2 E   0
+    2 F   0
+    2 G   1
+    2 H   0
+    ;
+    == 1 ==========================  
+\end{lstlisting}
+
+Zgodnie z wynikami wyznaczonymi przez solver lpsolve, czas maksymalny \(C_{max}\) wynosi 40 jednostek czasu,
+czyli jest o \(2.8\) jednostek czasu dłuższy niż w przypadku wariantu z zadanimi podzielonymi.
+
+Dla ułatwienia przedstawiam dodatkowo rozwiązanie w formie tabeli.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c | c | c | c |}
+        \hline
+        Zadanie    & A & B    & C & D & E  & F  & G & H \\
+        \hline
+        Procesor 1 &   &  & 5 &   &  12  & 12 &   & 9 \\
+        \hline
+        Procesor 2 & 9 & 14  &   & 9 &  &    & 4 &   \\
+        \hline
+    \end{tabular}
+    \caption{Czas przetwarzania poszczególnych zadań na wybranych procesorach}
+\end{table}
+
+\newpage
+
+\par\noindent\rule{\textwidth}{0.4pt}
+Podpunkt \ref{22b}
+\par\noindent\rule{\textwidth}{0.4pt}
+
+\par\noindent\rule{\textwidth}{0.4pt}
+Podpunkt \ref{22c}
+\par\noindent\rule{\textwidth}{0.4pt}
 
 \subsection{Modernizacja oświetlenia}
 \subsection{Planowanie produkcji realizowanej w porcjach}
