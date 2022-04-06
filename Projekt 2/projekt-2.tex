@@ -121,7 +121,6 @@ Na podstawie podanych danych \(n\) - liczba procesów,
 \(p_j\) - czas wykonania \(j\)-tego zadania, określić minimalny czas,
 w jakim można zakończyć wszystkie zadania (\(C_{max}\)).
 Stworzyć harmonogram realizujący wyznaczony czas.
-
 \subsubsection{Zadania niepodzielne}
 \begin{enumerate}[label=(\alph*)]
     \item \label{12a} Mając dane: \(n\) - liczba procesów, \(p_j\) - czas wykonania
@@ -141,19 +140,19 @@ Mając dane \(p_{ij}\) — czas wykonania \(j\)-tego zadania na \(i\)-tym proces
 zaproponuj model minimalizujący czas wykonania wszystkich zadań (\(C_{max}\)).
 \subsubsection{Zadania niepodzielne}
 \begin{enumerate}[label=(\alph*)]
-    \item Mając dane \(p_{ij}\) — czas wykonania j-tego zadania na i-tym procesorze,
+    \item \label{22a} Mając dane \(p_{ij}\) — czas wykonania j-tego zadania na i-tym procesorze,
           zaproponuj model minimalizujący czas wykonania wszystkich
           zadań (\(C_{max}\)).
-    \item Mając dane \(p_{ij}\) — czas wykonania j-tego zadania na i-tym procesorze,
+    \item \label{22b} Mając dane \(p_{ij}\) — czas wykonania j-tego zadania na i-tym procesorze,
           zaproponuj model minimalizujący sumę czasów przebywania w
           systemie (\(\sum F_j\))
-    \item czas wykonania j-tego zadania na i-tym procesorze,
+    \item \label{22c} czas wykonania j-tego zadania na i-tym procesorze,
           zaproponuj model minimalizujący sumę czasów oczekiwania na obsługę.
           (Wskazówka - czym różni ten punkt od poprzedniego)
 \end{enumerate}
 
 \subsection{Modernizacja oświetlenia}
-W związku ze wzrostem cen energii elektrycznej oraz zmianami cen źródeł światła wspólnota mieszkaniowa rozważa modernizację oświetlenia. 
+W związku ze wzrostem cen energii elektrycznej oraz zmianami cen źródeł światła wspólnota mieszkaniowa rozważa modernizację oświetlenia.
 Rozważana jest modernizacja oświetlenia wejść do 3 klatek schodowych, w każdym wejściu
 mamy po dwie oprawy świetlówkowe 36W (rzeczywisty pobór mocy 44 W),
 obecnie do włączania wykorzystywana jest fotokomórka. Można oszacować
@@ -345,7 +344,7 @@ Dane do zadania zostały zapisane w języku AMPL.
 \lstinputlisting[caption=Dane w języku AMPL]{./src/dane-1.dat}
 Dane zostały załączone w pliku \textit{dane-1.dat}.
 \subsubsection{Zadania podzielne}
-Problem przestawiony w niniejszym zadaniu jest problemem \(P|pmtn|C_{max}\) 
+Problem przestawiony w niniejszym zadaniu jest problemem \(P|pmtn|C_{max}\)
 tj. problem szeregowania podzielnych i niezależnych zadań na dwóch procesorach z kryterium \(C_{max}\). \\
 Model matematyczny przedstawia się następująco: \\ \\
 Parametry modelu: \\
@@ -360,8 +359,8 @@ Funkcja celu: \\
 Przy ograniczeniach: \\
 \begin{align*}
      & \sum^i_{j=1}x_{ij} = p_j \leq C_{max} \\
-     & \sum^j_{i=1}x_{ij} \leq C_{max}    \\
-     & \sum^i_{j=1}x_{ij} \leq C_{max}    \\
+     & \sum^j_{i=1}x_{ij} \leq C_{max}       \\
+     & \sum^i_{j=1}x_{ij} \leq C_{max}       \\
      & x_{ij} \geq 0
 \end{align*}
 
@@ -419,11 +418,11 @@ Pozostałe zadania przedstawiają się następująco:
 Rysunek ~\ref{fig:harmonogram-1} przedstawia harmonogram wyznaczonego czasu
 w formie wykresu Gantta, gdzie jedna jednostka czasu jest równa jednemu dniowi.
 
-\subsubsection{Zadania niepodzielone}
+\subsubsection{Zadania niepodzielne}
 \par\noindent\rule{\textwidth}{0.4pt}
-    Podpunkt \ref{12a}
+Podpunkt \ref{12a}
 \par\noindent\rule{\textwidth}{0.4pt}
-W przypadku zadania niepodzielnego jest to problem \(P||C_{max}\) 
+W przypadku zadania niepodzielnego jest to problem \(P||C_{max}\)
 tj. problem zadań niepodzielnych na dwóch procesorach z kryterium \(C_{max}\). \\
 Model przedstawia się następująco: \\ \\
 Parametry modelu: \\
@@ -438,9 +437,9 @@ Funkcja celu: \\
 \newpage
 Przy ograniczeniach: \\
 \begin{align*}
-    & \sum^j_{i=1}x_{ij} \cdot p_j \leq C_{max} \\
-    & \sum^i_{j=1}x_{ij} = 1 \\
-    & x \in  {0,1}
+     & \sum^j_{i=1}x_{ij} \cdot p_j \leq C_{max} \\
+     & \sum^i_{j=1}x_{ij} = 1                    \\
+     & x \in  {0,1}
 \end{align*}
 
 \lstinputlisting[caption=Model w języku AMPL]{./src/model-2.mod}
@@ -494,29 +493,88 @@ Kolejną różnicą jest przetworzenie \textbf{zadania C} w wariancie podzielnym
 na \textit{procesorze 2}, natomiast w wariancie niepodzielnym na \textit{procesorze 1}.
 Całkowity czas przetwarzania wszystkich zadań jest niezmienny niezależnie od wariantu.
 \par\noindent\rule{\textwidth}{0.4pt}
-    Podpunkt \ref{12b}
+Podpunkt \ref{12b}
 \par\noindent\rule{\textwidth}{0.4pt}
 Proponowaną regułą przydziału zadań minimalizującą czas wykonywania wszystkich
 zadań \(C_{max}\) jest szeregowanie listowe przy użyciu zasady LPT (ang. \textit{Longest Processing Time}).
 Metoda ta pozwala wybór kolejności zadań według ustalonej listy priorytetów.
 Po zakończeniu przetwarzania pierwszych zadań i zwolnieniu zasobów
-procesorów, przydzielane jest kolejne zadanie z listy do procesora, 
+procesorów, przydzielane jest kolejne zadanie z listy do procesora,
 który gwarantuje najwcześniejszy czas ukończenia zadania.
 
 \par\noindent\rule{\textwidth}{0.4pt}
-    Podpunkt \ref{12c}
+Podpunkt \ref{12c}
 \par\noindent\rule{\textwidth}{0.4pt}
 W przypadku zadania niekoniecznie optymalnego w przypadku problemu \(P||C_{max}\)
 należy wykorzystać metodę \textbf{LPT} zgodnie z wykładem:
 \begin{quote}
-    W przypadku Problemu \(P ||C_{max}\) najlepszy wartiant algorytmu szeregowania listowego LS wykorzystuje regułę priorytetową LPT. 
+    W przypadku Problemu \(P ||C_{max}\) najlepszy wartiant algorytmu szeregowania listowego LS wykorzystuje regułę priorytetową LPT.
     Wtedy długość uszeregowania \(C_{max}\) jest w najgorszym przypadku nie gorsza od optymalnej wartości \(C_{max}\)
     co najwyżej \( (\frac{4}{3} - \frac{1}{3m} )\) razy.
 \end{quote}
-
+\newpage
 \subsection{Szeregowanie zadań na niejednorodowych procesorach równoległych}
+Dane do zadania zostały zapisane w języku AMPL.
+\lstinputlisting[caption=Dane w języku AMPL]{./src/dane-2.dat}
+Dane zostały załączone w pliku \textit{dane-2.dat}.
 \subsubsection{Zadania podzielne}
-\subsubsection{Zadania niepodzielone}
+Problemem przedstawionym w zadaniu jest problem \(R|pmtn|C_{max}\)
+tj. problem szeregowania \(n\) zadań niezależnych i podzielnych
+na \(m\) procesorach równoległych, gdzie:
+\begin{align*}
+     & n = 8 \\
+     & m = 2
+\end{align*}
+Model matematyczny przedstawia się następująco: \\ \\
+Parametry modelu: \\
+\(x_{ij}\) - czas przetwarzania zadania \(j\) na procesorze \(i\) \\
+\(p_{ji}\) - czas przetwarzania zadania \(j\) \\ \\
+Zmienne decyzyjne: \\
+\(C_{max}\) - zmienna określająca maksymalny czas przetwarzania zadań na obu procesorach \\ \\
+Funkcja celu: \\
+\begin{align*}
+    min \text{ } C_{max}
+\end{align*}
+Przy ograniczeniach: \\
+\begin{align*}
+     & \sum^j_{i=1} \frac{x_{ij}}{p_j}  \\
+     & \sum^i_{j=1} x_{ij} \leq C_{max} \\
+     & \sum^j_{i=1} x_{ij} \leq C_{max} \\
+\end{align*}
+
+\lstinputlisting[caption=Model w języku AMPL]{./src/model-3.mod}
+Model został załączony w pliku \textit{model-3.mod}.
+
+
+\begin{lstlisting}[caption=Rozwiązanie znalezione solwerem lpsolve]
+    LP_SOLVE 4.0.1.0: optimal, objective 37.2
+    10 simplex iterations
+    x :=
+    1 A    0
+    1 B   11.2
+    1 C    5
+    1 D    0
+    1 E    0
+    1 F   12
+    1 G    0
+    1 H    9
+    2 A    9
+    2 B    3.2
+    2 C    0
+    2 D    9
+    2 E   12
+    2 F    0
+    2 G    4
+    2 H    0
+    ;
+    == 1 ==========================
+\end{lstlisting}
+Solwer lpsolve wyznaczył wartość \(C_{max}\) wynoszącą \(37.2\) jednostki czasu.
+Warto zauważyć, że jedynym podzielonym zadaniem jest \textbf{zadanie B},
+pozostałe zadania zostały wykonane w całości na jednym, wybranym procesorze.
+
+
+\subsubsection{Zadania niepodzielne}
 
 \subsection{Modernizacja oświetlenia}
 \subsection{Planowanie produkcji realizowanej w porcjach}
