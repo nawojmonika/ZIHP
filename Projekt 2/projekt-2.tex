@@ -788,10 +788,100 @@ Poniżej przedstawiam interpretacje wyników w formie tabeli:
 Podpunkt \ref{51}
 \par\noindent\rule{\textwidth}{0.4pt}
 
+W tabeli przedstawiono oferty w kolejności od najwyższej do najniższej.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ | c | c | c | c | c | c | c | c | c | c |}
+        \hline
+        Oferta    & 25 & 20 & 18 & 8 & 7 & 5 & 4 & 3 & 2 \\
+        \hline
+        Uczestnik & A  & C  & B  & A & B & C & B & A & C \\
+        \hline
+    \end{tabular}
+    \caption{Uszeregowane oferty w kolejności od najwyższej do najniższej}
+\end{table}
+
+Wyniki aukcji przedstawiają się w sposób następujący: \\
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ | c | c | c | c |}
+        \hline
+        Oferta    & 25 & 20 & 18 \\
+        \hline
+        Uczestnik & A  & C  & B  \\
+        \hline
+    \end{tabular}
+    \caption{Wariant, gdy uczestnicy przedstawiają najwyższe oferty}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ | c | c | c | c |}
+        \hline
+        Oferta    & 4 & 3 & 2 \\
+        \hline
+        Uczestnik & B & A & C \\
+        \hline
+    \end{tabular}
+    \caption{Wariant, gdy uczestnicy przedstawiają najniższe oferty}
+\end{table}
+
 \par\noindent\rule{\textwidth}{0.4pt}
 Podpunkt \ref{52}
 \par\noindent\rule{\textwidth}{0.4pt}
 
+Ze względu na to, że posiadamy 3 przedmioty na aukcji,
+wygrywają więc 3 najlepsze oferty:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ | c | c | c | c |}
+        \hline
+        Oferta    & 25 & 20 & 18 \\
+        \hline
+        Uczestnik & A  & C  & B  \\
+        \hline
+    \end{tabular}
+    \caption{Wyniki aukcji Vicrey‘a}
+\end{table}
+
+Obliczam, ile każdy uczestnik aukcji jest zobowiązany zapłacić:
+\begin{align*}
+    \text{Wartość aukcji: } 25 + 20 + 18 = 63
+\end{align*}
+Przypadek, gdy uczestnik \textbf{A} nie bierze udziału w aukcji. \\
+Wybrane oferty:
+\begin{align*}
+    20 + 18 + 7 = 45
+\end{align*}
+Wkład uczestnika \textbf{A}:
+\begin{align*}
+    63 - 45 = 18
+\end{align*}
+Przypadek, gdy uczestnik \textbf{B} nie bierze udziału w aukcji. \\
+Wybrane oferty:
+\begin{align*}
+    25 + 20 + 8 = 53
+\end{align*}
+Wkład uczestnika \textbf{B}:
+\begin{align*}
+    63 - 53 = 10
+\end{align*}
+Przypadek, gdy uczestnik \textbf{C} nie bierze udziału w aukcji. \\
+Wybrane oferty:
+\begin{align*}
+    25 + 18 + 8 = 51
+\end{align*}
+Wkład uczestnika \textbf{C}:
+\begin{align*}
+    63 - 53 = 12
+\end{align*}
+
+Zgodnie z powyższymi obliczeniami każdy uczestnik aukcji powinien zapłacić:
+\begin{align*}
+     & A: 25 -  18 = 7 \\
+     & B: 25 -  10 = 15 \\
+     & C: 25 -  12= 13 \\
+\end{align*}
 \par\noindent\rule{\textwidth}{0.4pt}
 Podpunkt \ref{53}
 \par\noindent\rule{\textwidth}{0.4pt}
@@ -807,5 +897,11 @@ Podpunkt \ref{55}
 \par\noindent\rule{\textwidth}{0.4pt}
 Podpunkt \ref{56}
 \par\noindent\rule{\textwidth}{0.4pt}
+
+
+\newpage
+\lstlistoflistings
+\listoffigures
+\listoftables
 
 \end{document}
