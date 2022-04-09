@@ -606,8 +606,9 @@ Dla ułatwienia przedstawiam dodatkowo rozwiązanie w formie tabeli.
     \caption{Czas przetwarzania poszczególnych zadań na wybranych procesorach}
 \end{table}
 
-\subsubsection{Zadania niepodzielne}
+\newpage
 
+\subsubsection{Zadania niepodzielne}
 \par\noindent\rule{\textwidth}{0.4pt}
 Podpunkt \ref{22a}
 \par\noindent\rule{\textwidth}{0.4pt}
@@ -774,8 +775,68 @@ Poniżej przedstawiam interpretacje wyników w formie tabeli:
         Procesor 2 & G & A & D & E &   &   &   &   \\
         \hline
     \end{tabular}
-    \caption{Koleność przetwarzania poszczególnych zadań na wybranych procesorach}
+    \caption{Kolejność przetwarzania poszczególnych zadań na wybranych procesorach}
 \end{table}
+
+\newpage
+
+\par\noindent\rule{\textwidth}{0.4pt}
+Podpunkt \ref{22c}
+\par\noindent\rule{\textwidth}{0.4pt}
+W opisanym przypadku celem jest minimalizacja czasu oczekiwania na przetworzenie zadania.
+Model matematyczny jest analogiczny do tego z podpunktu \ref{22b},
+z drobną modyfikacją funkcji celu, gdzie zamieniamy \(k\) na \((k-1)\).
+
+\lstinputlisting[caption=Model w języku AMPL]{./src/model-6.mod}
+Model został załączony w pliku \textit{model-6.mod}.
+
+\begin{lstlisting}[caption=Rozwiązanie znalezione solwerem lpsolve]
+    LP_SOLVE 4.0.1.0: optimal, objective 84
+    26 simplex iterations
+    x [1,*,*]
+    :   1   2   3   4   5   6   7   8    :=
+    A   0   0   0   0   0   0   0   0
+    B   0   0   0   0   0   0   0   0
+    C   0   0   0   1   0   0   0   0
+    D   0   0   0   0   0   0   0   0
+    E   1   0   0   0   0   0   0   0
+    F   0   1   0   0   0   0   0   0
+    G   0   0   0   0   0   0   0   0
+    H   0   0   1   0   0   0   0   0
+    
+     [2,*,*]
+    :   1   2   3   4   5   6   7   8    :=
+    A   0   0   1   0   0   0   0   0
+    B   1   0   0   0   0   0   0   0
+    C   0   0   0   0   0   0   0   0
+    D   0   1   0   0   0   0   0   0
+    E   0   0   0   0   0   0   0   0
+    F   0   0   0   0   0   0   0   0
+    G   0   0   0   1   0   0   0   0
+    H   0   0   0   0   0   0   0   0
+    ;
+    == 1 ==========================
+\end{lstlisting}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c | c | c | c | c | c | c |}
+        \hline
+        Zadanie    & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+        \hline
+        Procesor 1 & C & H & F & E &   &   &   &   \\
+        \hline
+        Procesor 2 & G & A & D & B &   &   &   &   \\
+        \hline
+    \end{tabular}
+    \caption{Kolejność przetwarzania poszczególnych zadań na wybranych procesorach}
+\end{table}
+
+Jak widać na powyższych wynikach nie tylko wartość minimalizowanej funkcji uległa zmniejszanie
+(z wartości \textbf{158} z rozwiązania podpunktu \ref{22b} do wartości \textbf{84}),
+ale również uległy zmianie procesory, na których przetwarzane jest zadanie \textbf{E}
+oraz zadanie \textbf{B}. Oba zadania pozostały jednak jako ostatnie zadania przetworzone 
+na poszczególnych procesorach. Reszta zadań nie uległa zmianie.
 
 \newpage
 
