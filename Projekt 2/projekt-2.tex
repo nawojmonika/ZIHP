@@ -223,16 +223,15 @@ Na aukcji zostało wystawionych n jednakowych przedmiotów. Oferty uczestników 
     \item \label{52} wyznacz rozwiązania aukcji Vicrey`a,
     \item \label{53} wyznacz rozwiązanie niejawnej aukcji jednolitej ceny (ceny pierwszej
           odrzuconej oferty)
-    \item \label{54} wyznacz rozwiązanie aukcji niejawnej pierwszej ceny, jesli wystawiają-
-          cy moąe poznać złożone oferty i zmniejszyć liczbę wystawianych przed-
-          miotów, w celu zwiększenia przychodu,
+    \item \label{54} wyznacz rozwiązanie aukcji niejawnej pierwszej ceny,
+          jesli wystawiający mogą poznać złożone oferty i zmniejszyć liczbę wystawianych
+          przedmiotów, w celu zwiększenia przychodu,
     \item \label{55} wyznacz rozwiązania aukcji Vicrey’a, jesli wystawiający może poznać
           złożone oferty i zmniejszyć liczbę wystawianych przedmiotów, w celu
           zwiększenia przychodu,
     \item \label{56} wyznacz rozwiązanie niejawnej aukcji jednolitej ceny (ceny pierwszej
           odrzuconej oferty), jesli wystawiający może poznać złożone oferty i
-          zmniejszyć liczbę wystawianych przedmiotów, w celu zwiększenia przy-
-          chodu
+          zmniejszyć liczbę wystawianych przedmiotów, w celu zwiększenia przychodu
 \end{enumerate}
 \newpage
 \section{Dane}
@@ -890,16 +889,92 @@ ponieważ jest to wartość najwyższej odrzuconej oferty.
 \par\noindent\rule{\textwidth}{0.4pt}
 Podpunkt \ref{54}
 \par\noindent\rule{\textwidth}{0.4pt}
+W przypadku aukcji niejawnej pierwszej ceny, wygranie jej zależy od najwyższej
+przedstawionej oferty przez uczestnika.
+W związku z powyższym zmniejszenie ilości przedmiotów nie wpłynie na zwiększenie przychodu.
+\\ \\
+Wyniki aukcji przedstawiają się w sposób następujący: \\
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ | c | c | c |}
+        \hline
+        Oferta    & 25 & 20 \\
+        \hline
+        Uczestnik & A  & C  \\
+        \hline
+    \end{tabular}
+    \caption{Wariant, gdy uczestnicy przedstawiają najwyższe oferty}
+\end{table}
+
+W przypadku, gdy uczestnicy aukcji przedstawiają najwyższe oferty
+sprzedawca dwóch przedmiotów otrzymuje przychód w wartości \textbf{45}
+jednostek ceny, w sytuacji gdyby sprzedawca wystawił trzy przedmioty
+jego przychód wynosiłby \textbf{63} jednostek ceny.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ | c | c | c |}
+        \hline
+        Oferta    & 4 & 3 \\
+        \hline
+        Uczestnik & B & A \\
+        \hline
+    \end{tabular}
+    \caption{Wariant, gdy uczestnicy przedstawiają najniższe oferty}
+\end{table}
+
+W przypadku, gdy uczestnicy aukcji przedstawiają najniższe oferty
+sprzedawca dwóch przedmiotów otrzymuje przychód w wartości \textbf{7}
+jednostek ceny, w sytuacji gdyby sprzedawca wystawił trzy przedmioty
+jego przychód wynosiłby \textbf{9} jednostek ceny.
+\\
+Podsumowując sprzedawca w przypadku aukcji z niejawnej pierwszej ceny
+zmniejszając ilość przedmiotów na aukcji nie zwiększa swojego przychodu.
 
 \par\noindent\rule{\textwidth}{0.4pt}
 Podpunkt \ref{55}
 \par\noindent\rule{\textwidth}{0.4pt}
+W przypadku wystawienia dwóch przedmiotów na aukcji Vicrey'a
+przy posiadaniu trzech ofert od uczestników musimy jedną z nich odrzucić.
+\\ \\
+Wyniki aukcji przedstawiają się w sposób następujący: \\
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ | c | c | c |}
+        \hline
+        Oferta    & 25 & 20 \\
+        \hline
+        Uczestnik & A  & C  \\
+        \hline
+    \end{tabular}
+    \caption{Wyniki aukcji Vicrey'a w przypadku wystawienia dwóch przedmiotów}
+\end{table}
+
+W powyższej sytuacji uczestnicy wygranych aukcji (uczestnik \textbf{A} oraz \textbf{C})
+winni są zapłacić wartość pierwszej odrzuconej oferty, czyli \textbf{18}
+jednostek ceny.
+\\ \\
+W przypadku gdyby sprzedawca postanowił dalej zmniejszych ilość wystawionych
+przedmiotów na aukcji do jednego, aukcję wygrałby uczestnik \textbf{A}
+z ofertą \textbf{25} jednostek ceny. \\
+W związku z tym uczestnik \textbf{A} winien jest zapłacić \textbf{20}
+jednostek ceny, czyli wartość pierwszej odrzuconej oferty.
+\\ \\
+W związku ze zmniejszaniem ilości przedmiotów sprzedawca otrzymuje
+większy przychód per wystawiony przedmiot, jednocześnie nadal posiada
+przedmioty, które mogą przynieść mu dodatkowy przychód na innych aukcjach.
 
 \par\noindent\rule{\textwidth}{0.4pt}
 Podpunkt \ref{56}
 \par\noindent\rule{\textwidth}{0.4pt}
-
-
+W przypadku wystawienia dwóch przedmiotów na aukcji niejawnej jednolitej ceny
+uczestnicy \textbf{A} oraz \textbf{C} powinni zapłacić wartość \textbf{18} jednostek ceny,
+jako że jest to pierwsza wartość najwyższej odrzuconej oferty.
+\\ \\
+Analogicznie w przypadku zmniejszenia wystawionych przedmiotów do jednego
+uczestnik \textbf{A} powinien zapłacić \textbf{20} jednostek ceny.
+\\
+Wniosek z aukcji niejawnej jednolitej ceny jest jednakowy z wnioskami z rozwiązania podpunktu \ref{56}.
 \newpage
 \lstlistoflistings
 \listoffigures
